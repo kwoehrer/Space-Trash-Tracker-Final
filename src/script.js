@@ -1,6 +1,12 @@
 //const myFunction = require('addSat');
   //import{finDat} from "../catalogBuild.js"
-  const Cesium = require("../node_modules/cesium/Source/Cesium.js");
+  window.CESIUM_BASE_URL = '../node_modules/cesium';
+  require('../node_modules/cesium/CesiumUnminified/Cesium.js');
+  require('../node_modules/cesium/Cesium/Widgets/widgets.css');
+  var Cesium = window.Cesium;
+
+  //const Cesium = require("../node_modules/cesium/Source/Cesium.js");
+  satellite = require('satellite.js');
   //console.log(finDat);
   var sample = require("./addSat.js");
 
@@ -81,6 +87,7 @@
       positionsOverTime.addSample(time, position);
     }
     
+
     // Visualize the satellite with a red dot.
     const satellitePoint = viewer.entities.add({
       position: positionsOverTime,
@@ -105,6 +112,7 @@
 
 
 viewer.toggle
+
 
 function addSatellite(tle, viewer, track){
   const satrec = satellite.twoline2satrec(
