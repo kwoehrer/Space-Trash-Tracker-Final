@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--- Add in style later
+
+Currently implicitly mapping to localhost:8080 which requires server start-->
+</head>
+<body>
+  <script>
+    window.CESIUM_BASE_URL = 'https://localhost:5000/';
+  </script>
+  <div id="loading">
+    <h1>Loading...</h1>
+  </div>
+
+  <div id="cesiumContainer"></div>
+  <script src = "..\dist\demo.js" ></script>
+</body>
+</html>
