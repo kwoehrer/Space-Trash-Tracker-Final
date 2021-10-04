@@ -3,9 +3,7 @@
 <head>
     <title>Space Trash Tracker</title>
     <meta charset = "utf-16">
-  <script src="https://cesium.com/downloads/cesiumjs/releases/1.81/Build/Cesium/Cesium.js"></script>
   <link href="https://cesium.com/downloads/cesiumjs/releases/1.81/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/satellite.js/4.0.0/satellite.js"></script>
   <link href="style.css" rel="stylesheet">
   <style>
     h1{
@@ -16,10 +14,12 @@
 </head>
 <body>
   <div id="loading">
-    <h1> Debris = Red, Active Satellites = Yellow</h1>
+    <h1> Debris = Red, Active Satellites = Green</h1>
   </div>
   <div id="cesiumContainer">
   </div>
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.81/Build/Cesium/Cesium.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/satellite.js/4.0.0/satellite.js"></script>
   <script src= "../dist/script.js"></script>
   </script>
 </body>
