@@ -4,23 +4,38 @@
     <title>Space Trash Tracker</title>
     <meta charset = "utf-16">
   <link href="https://cesium.com/downloads/cesiumjs/releases/1.81/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
-  <link href="style.css" rel="stylesheet">
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.81/Build/Cesium/Cesium.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/satellite.js/4.0.0/satellite.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Dosis' rel='stylesheet'>
   <style>
     h1{
       background-color: black;
       color: rgb(252, 199, 87);
+      text-align: center;
+      font-size: 55px;
+      margin: 0;
+      padding: 0;
+    }
+    p{
+      background-color: black;
+      text-align: center;
+      font-size: 40px;
+      margin: 0;
+      padding: 2px;
+    }
+    body{
+        font-family: 'Dosis';font-size: 22px;
     }
   </style>
 </head>
-<body>
-  <div id="loading">
-    <h1> Debris = Red, Active Satellites = Green</h1>
-  </div>
+<body style="background-color:black;">
+  <h1> Space Trash Tracker</h1> 
+  <p style= "color:red"><strong>Red = Space Debris</strong></p>
+  <p style= "color: lime"><strong>Green = Active Satellites</strong></p>
+  <p style= "color:rgb(243, 199, 104);"><strong>Click on an Object for its Name. Displayed Object Count: 7,000</strong></p>
   <div id="cesiumContainer">
   </div>
-  <script src="https://cesium.com/downloads/cesiumjs/releases/1.81/Build/Cesium/Cesium.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/satellite.js/4.0.0/satellite.js"></script>
-  <script src= "../dist/script.js"></script>
+  <script src= "./script.js"></script>
   </script>
 </body>
 </html>

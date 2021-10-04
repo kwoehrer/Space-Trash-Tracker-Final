@@ -1,3 +1,5 @@
+var loaded = false;
+
 // Initialize the Cesium viewer.
 const viewer = new Cesium.Viewer('cesiumContainer', {
   imageryProvider: new Cesium.TileMapServiceImageryProvider({
@@ -9,9 +11,8 @@ const viewer = new Cesium.Viewer('cesiumContainer', {
 // This causes a bug on android, see: https://github.com/CesiumGS/cesium/issues/7871
 // viewer.scene.globe.enableLighting = true;
 
-// Give SatelliteJS the TLE's and a specific time.
-// Get back a longitude, latitude, height (km).
-// We're going to generate a position every 10 seconds from now until 6 seconds from now. 
+// We're going to generate a position every 10 seconds from now until 60*60*6 seconds from now. 
+// Set up the clock widget on cesium
 const totalSeconds = 60 * 60 * 6;
 const timestepInSeconds = 10;
 const start = Cesium.JulianDate.fromDate(new Date());
@@ -23,21 +24,17 @@ viewer.timeline.zoomTo(start, stop);
 viewer.clock.multiplier = 40;
 viewer.clock.clockRange = Cesium.ClockRange.LOOP_STOP;
 
-
-
-//const { default: Color } = require('cesium/Source/Core/Color');
+// Debris json is collected from a query against celestrak database. We should contact them for a better optimized query to remove irrelavent information. It will speed up runtime.
 let dataFile = require('./debris.json');
-let satNamArr =[]
+// Name Array in case we want to add label functionality per event click on entity
+let satNamArr =[];
 
 //This code pushes the first 3000 objects on the json to the visualizer. From our query we could access more but loading time stalls out at 3000+.
-for(let i = 0; i < 2000; i++){
+for(let i = 0; i < 7000; i++){
   var json = JSON.stringify(dataFile[i]);
   var totalTLE = JSON.parse(json).TLE_LINE0 + "\n"+ JSON.parse(json).TLE_LINE1 + "\n" + JSON.parse(json).TLE_LINE2;
   addSatellite(viewer,totalTLE,false,i);
 }
-
-//tleArr.forEach(element => addSatellite(viewer, element, false));
-
 
 // Wait for globe to load then zoom out     
 let initialized = false;
@@ -46,19 +43,31 @@ viewer.scene.globe.tileLoadProgressEvent.addEventListener(() => {
     viewer.clock.shouldAnimate = true;
     initialized = true;
     viewer.scene.camera.zoomOut(7000000);
-    document.querySelector("#loading").classList.toggle('disappear', true)
+    //Code below is for use in loading bar
+    //document.querySelector("#loading").classList.toggle('disappear', true)
   }
 });
 
 
 /**
- * This function adds the space debris or satellite to earths orbit
+ * This function adds the space debris or satellite to earths orbit.
+ * Give SatelliteJS the TLE's and a specific time.
+ * Get back a longitude, latitude, height (km).
+ * Then create cesium entity
  * @param {cesium viewer instance} viewer 
  * @param {tle file string} tle 
  * @param {boolean} track 
  */
 function addSatellite(viewer, tle, track,i){
-  const satName = tle.split('\n')[0].trim();
+  //Trim name to match actual satellite name
+  var satName = tle.split('\n')[0].trim().substring(2);
+  //Change deb to debris
+  if(satName.endsWith("DEB")){
+    satName = satName + "RIS";
+  }
+
+
+
   const id = i;
 
   satNamArr.push[satName];
@@ -77,7 +86,7 @@ function addSatellite(viewer, tle, track,i){
     }
   else{
     if(tle.includes("DEB")||tle.includes("R/B")) color = Cesium.Color.RED;
-    else color = Cesium.Color.GREEN;
+    else color = Cesium.Color.LIME;
     }
 
 
@@ -95,82 +104,17 @@ function addSatellite(viewer, tle, track,i){
     positionsOverTime.addSample(time, position);
   }
 
+
+  //Tried displaying orbital paths but leads to lag on view model
+  //Tried displaying labels (names of satellites) directly on screen but lead too much clutter, used cesium UI to access names instead
   const satellitePoint = viewer.entities.add({
     position: positionsOverTime,
     point: { pixelSize: 5, color: color },
     name: satName,
-    id: i,
-
-    label : {
-      text : satName,
-        font : '6pt monospace',
-        style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-        outlineWidth : 2,
-        verticalOrigin : Cesium.VerticalOrigin.BOTTOM,
-    }
+    id:i,
 
   });
 
   // Set the camera to follow the satellite 
   if(track) viewer.trackedEntity = satellitePoint;
 }
-
-const clickHandler = new Cesium.ScreenSpaceEventHandler('cesiumContainer');
-clickHandler.handler.setInputAction(function (movement) {
-  var pick = widget.scene.pick(movement.position);
-  if (Cesium.defined(pick) && (pick.id.match(/label_([0-9]+)/))) {
-      var id = parseInt(RegExp.$1);
-      var point = constant.points[id];
-      widget.infoBox.viewModel.titleText = point.label;
-      widget.infoBox.viewModel.descriptionRawHtml = point.description;
-      widget.infoBox.viewModel.showInfo = true;
-      widget.infoBox.viewModel.closeClicked.addEventListener(function() {widget.infoBox.viewModel.showInfo = false;});
-  }
-}, Cesium.ScreenSpaceEventType.LEFT_CLICK);
-//Search bar
-
-/**
- * Returns the top-most entity at the provided window coordinates
- * or undefined if no entity is at that location.
- *
- * @param {Cartesian2} windowPosition The window coordinates.
- * @returns {Entity} The picked entity or undefined.
- */
- function pickEntity(viewer, windowPosition) {
-  var picked = viewer.scene.pick(windowPosition);
-  if (defined(picked)) {
-    var id = Cesium.defaultValue(picked.id, picked.primitive.id);
-    if (id instanceof Cesium.Entity) {
-      return id;
-    }
-  }
-  return undefined;
-};
-
-/**
- * Returns the list of entities at the provided window coordinates.
- * The entities are sorted front to back by their visual order.
- *
- * @param {Cartesian2} windowPosition The window coordinates.
- * @returns {Entity[]} The picked entities or undefined.
- */
-function drillPickEntities(viewer, windowPosition) {
-  var i;
-  var entity;
-  var picked;
-  var pickedPrimitives = viewer.scene.drillPick(windowPosition);
-  var length = pickedPrimitives.length;
-  var result = [];
-  var hash = {};
-
-  for (i = 0; i < length; i++) {
-    picked = pickedPrimitives[i];
-    entity = Cesium.defaultValue(picked.id, picked.primitive.id);
-    if (entity instanceof Cesium.Entity &&
-        !Cesium.defined(hash[entity.id])) {
-      result.push(entity);
-      hash[entity.id] = true;
-    }
-  }
-  return result;
-};
