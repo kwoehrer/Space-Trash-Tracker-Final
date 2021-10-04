@@ -1,10 +1,10 @@
 module.exports = {
   //First we run
   mode: "development",
-  entry: './src/script.js',
+  entry: './src/server.js',
   //This will compile our javascript
   output:{
-    filename: "demo.js",
+    filename: "server.js",
   }
 
 }
