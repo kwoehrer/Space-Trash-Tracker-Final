@@ -1,9 +1,9 @@
-# Awards
+# AWARDS
 Local Level: **First Place at Local Milwaukee NASA Hackathon Hosted by Milky Way Tech Hub**
 
 Global Level: Still being ranked and rated.
 
-# Live Web Application
+# LIVE WEB APPLICATION
 https://kwoehrer.uwmsois.com/ROPV/
 
 Please note: We are displaying 7,000 orbiting objects and the web application may take awhile to load. I am currently working on better optimizing this code to decrease loading time.
