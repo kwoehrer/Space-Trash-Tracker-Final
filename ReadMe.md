@@ -1,5 +1,6 @@
 # Awards
 Local Level: **First Place at Local Milwaukee NASA Hackathon Hosted by Milky Way Tech Hub**
+
 Global Level: Still being ranked and rated.
 
 # DETAILED PROJECT DESCRIPTION
