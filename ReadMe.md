@@ -18,4 +18,5 @@ Space Apps challenged our team to dive into the topic of full stack web applicat
 3. Further utilized the cesiumJS library to show object names when clicked.
 
       a. Displaying the object name directly on the cesium viewer model causes frame lag so we used 
+      
       b. Added a portion to script that changes TLE notation to normal english (For example, Deb -> Debris)
