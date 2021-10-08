@@ -3,6 +3,10 @@ Local Level: **First Place at Local Milwaukee NASA Hackathon Hosted by Milky Way
 
 Global Level: Still being ranked and rated.
 
+# Live Web Application
+https://kwoehrer.uwmsois.com/ROPV/
+
+Please note: We are displaying 7,000 orbiting objects and the web application may take awhile to load. I am currently working on better optimizing this code to decrease loading time.
 # DETAILED PROJECT DESCRIPTION
 The space trash tracker provides 3D, geospatial visuals that represent space debris and satellites currently orbiting our planet. It works utilizing TLEs (two-line element sets) that are obtained by querying Celestrak and Space-Track. After obtaining the TLEs, the application utilizes Satellite.js to parse relevant information such as position and velocity. This information is then passed into an open-source geospatial visualizer, CesiumJS, and displayed in a way that can be digested by your average user. The web application was developed with JavaScript, Node JS, HTML, and CSS. This program offers a potential solution to avoid damage from collision with space debris and satellites. We hope that this web application will provide a means to show the current severity of pollution by debris in space and inspire innovators to tackle the challenge of eliminating space debris.
 
