@@ -13,7 +13,7 @@ const viewer = new Cesium.Viewer('cesiumContainer', {
 
 // We're going to generate a position every 10 seconds from now until 60*60*60 seconds from now. 
 // Set up the clock widget on cesium
-const totalSeconds = 60 * 60 * 60;
+const totalSeconds = 60 * 60 * 6;
 const timestepInSeconds = 10;
 const start = Cesium.JulianDate.fromDate(new Date());
 const stop = Cesium.JulianDate.addSeconds(start, totalSeconds, new Cesium.JulianDate());
@@ -29,8 +29,8 @@ let dataFile = require('./debris.json');
 // Name Array in case we want to add label functionality per event click on entity
 let satNamArr =[];
 
-//This code pushes the first 3000 objects on the json to the visualizer. From our query we could access more but loading time stalls out at 3000+.
-for(let i = 0; i < 100; i++){
+//This code pushes the first 7000 objects on the json to the visualizer. From our query we could access more but loading time stalls out at 7000+.
+for(let i = 0; i < 7000; i++){
   var json = JSON.stringify(dataFile[i]);
   var totalTLE = JSON.parse(json).TLE_LINE0 + "\n"+ JSON.parse(json).TLE_LINE1 + "\n" + JSON.parse(json).TLE_LINE2;
   addSatellite(viewer,totalTLE,false,i);
