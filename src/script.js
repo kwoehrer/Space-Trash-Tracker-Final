@@ -11,9 +11,9 @@ const viewer = new Cesium.Viewer('cesiumContainer', {
 // This causes a bug on android, see: https://github.com/CesiumGS/cesium/issues/7871
 // viewer.scene.globe.enableLighting = true;
 
-// We're going to generate a position every 10 seconds from now until 60*60*6 seconds from now. 
+// We're going to generate a position every 10 seconds from now until 60*60*60 seconds from now. 
 // Set up the clock widget on cesium
-const totalSeconds = 60 * 60 * 6;
+const totalSeconds = 60 * 60 * 60;
 const timestepInSeconds = 10;
 const start = Cesium.JulianDate.fromDate(new Date());
 const stop = Cesium.JulianDate.addSeconds(start, totalSeconds, new Cesium.JulianDate());
