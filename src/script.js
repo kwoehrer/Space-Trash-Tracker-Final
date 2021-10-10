@@ -30,7 +30,7 @@ let dataFile = require('./debris.json');
 let satNamArr =[];
 
 //This code pushes the first 3000 objects on the json to the visualizer. From our query we could access more but loading time stalls out at 3000+.
-for(let i = 0; i < 7000; i++){
+for(let i = 0; i < 100; i++){
   var json = JSON.stringify(dataFile[i]);
   var totalTLE = JSON.parse(json).TLE_LINE0 + "\n"+ JSON.parse(json).TLE_LINE1 + "\n" + JSON.parse(json).TLE_LINE2;
   addSatellite(viewer,totalTLE,false,i);
@@ -44,10 +44,9 @@ viewer.scene.globe.tileLoadProgressEvent.addEventListener(() => {
     initialized = true;
     viewer.scene.camera.zoomOut(7000000);
     //Code below is for use in loading bar
-    //document.querySelector("#loading").classList.toggle('disappear', true)
+    document.getElementById("loading").style.display = "none";
   }
 });
-
 
 /**
  * This function adds the space debris or satellite to earths orbit.

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Space Trash Tracker</title>
-    <meta charset = "utf-16">
+  <title>Space Trash Tracker</title>
+  <meta charset = "utf-16">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
   <link href="https://cesium.com/downloads/cesiumjs/releases/1.81/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
   <script src="https://cesium.com/downloads/cesiumjs/releases/1.81/Build/Cesium/Cesium.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/satellite.js/4.0.0/satellite.js"></script>
@@ -26,15 +27,33 @@
     body{
         font-family: 'Dosis';font-size: 22px;
     }
+    #loading{
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        bottom: 0px;
+        pointer-events: none;
+        z-index: 9999;
+        background: black url("./loading.gif") no-repeat;
+        background-position: center;
+        opacity: 1;
+      }
+
   </style>
 </head>
 <body style="background-color:black;">
+  <div id = "loading"></div>
+ 
   <h1> Space Trash Tracker</h1> 
   <p style= "color:red"><strong>Red = Space Debris</strong></p>
   <p style= "color: lime"><strong>Green = Active Satellites</strong></p>
   <p style= "color:rgb(243, 199, 104);"><strong>Click on an Object for its Name. Displayed Object Count: 7,000</strong></p>
+
   <div id="cesiumContainer">
   </div>
+
+
   <script src= "../dist/script.js"></script>
   </script>
 </body>
