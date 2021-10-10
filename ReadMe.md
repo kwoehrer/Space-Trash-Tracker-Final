@@ -20,11 +20,13 @@ Space Apps challenged our team to dive into the topic of full stack web applicat
 3. Allow users to search for specific objects and then track that object.
 4. Allow users to input hypthothetical TLE data sets.
 
-# POST HACKATHON COMPLETE ADDITIONS
-1. Better optimized our loops for faster loading. (We can load 7,000 objects now instead of 3,000)
+# POST HACKATHON KRISCHANS COMPLETE ADDITIONS 
+1. Better optimized our loops for faster loading. (We can load 7,000 objects now instead of 3,000).
 2. Created a html/css layout that is user friendly.
-3. Further utilized the cesiumJS library to show object names when clicked.
+3. Created a preloader for the web application.
+4. Further utilized the cesiumJS library to show object names when clicked.
 
       a. Displaying the object name directly on the cesium viewer model caused frame lag so we used the current implementation of viewing names instead.
       
       b. Added a portion to script that changes TLE notation to normal english (For example, Deb -> Debris)
+      
