@@ -24,7 +24,7 @@ Space Apps challenged our team of six members to dive into the topic of full sta
 4. Allow users to input hypthothetical TLE data sets.
 5. ~~Possible bug with new update-- Preloader not properly working. Currently figuring out why.~~
 
-      Solved: Changed script loads to defer-load as opposed to async-load. Async load ignores the order of scripts, however defer loads scripts in order which allows us to load cesium first then the scripts that are dependent on it. (A drawback to the CDN approach but CDN is still faster.
+      Solved: Changed script loads to defer-load as opposed to async-load. Async load ignores the order of scripts, however defer loads scripts in order which allows us to load cesium first then the scripts that are dependent on it. (A drawback to the CDN approach but CDN is still faster on average.)
 
 # POST HACKATHON KRISCHANS COMPLETE ADDITIONS 
 1. ~~Better optimized our loops for faster loading. (We can load 7,000 objects now instead of 3,000).~~ The web application now displays 10811 oribiting objects. Load time is  shorter than our initial display of 3000 objects but still too long for my standards.
