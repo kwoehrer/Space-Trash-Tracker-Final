@@ -19,6 +19,7 @@ Space Apps challenged our team to dive into the topic of full stack web applicat
 2. Create a script that better automates the query (contact spacetrack/celestrak and see if we can get access to their api)
 3. Allow users to search for specific objects and then track that object.
 4. Allow users to input hypthothetical TLE data sets.
+5. Possible bug with new update-- Preloader not properly working. Currently figuring out why.
 
 # POST HACKATHON KRISCHANS COMPLETE ADDITIONS 
 1. ~~Better optimized our loops for faster loading. (We can load 7,000 objects now instead of 3,000).~~ The web application now displays 10811 oribiting objects. Load time is  shorter than our initial display of 3000 objects but still too long for my standards.
