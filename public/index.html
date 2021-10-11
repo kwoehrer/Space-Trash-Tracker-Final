@@ -4,10 +4,6 @@
   <title>Space Trash Tracker</title>
   <meta charset = "utf-16">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-  <link href="https://cesium.com/downloads/cesiumjs/releases/1.81/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
-  <script src="https://cesium.com/downloads/cesiumjs/releases/1.81/Build/Cesium/Cesium.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/satellite.js/4.0.0/satellite.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link href='https://fonts.googleapis.com/css?family=Dosis' rel='stylesheet'>
   <style>
     h1{
@@ -46,7 +42,10 @@
 </head>
 <body style="background-color:black;">
   <div id = "loading"><h1>Loading...</h1></div>
- 
+  <!-- Scripts were moved down here to defer load, This allows for the loading preloader to display correctly on most devices. Cannot do async or they execute in random order which leads to cesium error-->
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.81/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+  <script defer src="https://cesium.com/downloads/cesiumjs/releases/1.81/Build/Cesium/Cesium.js"></script>
+  <script defer  src="https://cdnjs.cloudflare.com/ajax/libs/satellite.js/4.0.0/satellite.js"></script>
   <h1> Space Trash Tracker</h1> 
   <p style= "color:red"><strong>Red = Space Debris</strong></p>
   <p style= "color: lime"><strong>Green = Active Satellites</strong></p>
@@ -54,6 +53,6 @@
 
   <div id="cesiumContainer">
   </div>
-  <script async src= "../dist/script.js"></script>
+  <script defer src= "../dist/script.js"></script>
 </body>
 </html>
