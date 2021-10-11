@@ -24,18 +24,6 @@ viewer.timeline.zoomTo(start, stop);
 viewer.clock.multiplier = 40;
 viewer.clock.clockRange = Cesium.ClockRange.LOOP_STOP;
 
-// Debris json is collected from a query against celestrak database. We should contact them for a better optimized query to remove irrelavent information. It will speed up runtime.
-let dataFile = require('./debris.json');
-// Name Array in case we want to add label functionality per event click on entity
-let satNamArr =[];
-
-//This code pushes the first 7000 objects on the json to the visualizer. From our query we could access more but loading time stalls out at 7000+.
-for(let i = 0; i < 7000; i++){
-  var json = JSON.stringify(dataFile[i]);
-  var totalTLE = JSON.parse(json).TLE_LINE0 + ", "+ JSON.parse(json).objectType + "\n"+ JSON.parse(json).TLE_LINE1 + "\n" + JSON.parse(json).TLE_LINE2;
-  addSatellite(viewer,totalTLE,false,i);
-}
-
 // Wait for globe to load then zoom out     
 let initialized = false;
 viewer.scene.globe.tileLoadProgressEvent.addEventListener(() => {
@@ -45,8 +33,22 @@ viewer.scene.globe.tileLoadProgressEvent.addEventListener(() => {
     viewer.scene.camera.zoomOut(7000000);
     //Code below is for use in loading bar
     document.getElementById("loading").style.display = "none";
+    document.getElementById("objCount").innerHTML = objCount.toString();
   }
 });
+
+
+// Debris json is collected from a query against celestrak database. We parse relevant data with the JSON Parser and then store that as a parsedTLEList. That list is then utilized here as an array of srings.
+let dataFile = require('./parsedTLEList.json');
+// Set an array equal to datafile, this step is technically not needed but done for making the code cleaner.
+let arrTLE = dataFile;
+let objCount = 0;
+
+//This code pushes ALL parsed objects
+for(let i = 0; i < arrTLE.length; i++){
+  addSatellite(viewer,arrTLE[i],false,i);
+  objCount = i;
+}
 
 /**
  * This function adds the space debris or satellite to earths orbit.
@@ -60,20 +62,20 @@ viewer.scene.globe.tileLoadProgressEvent.addEventListener(() => {
 function addSatellite(viewer, tle, track,i){
   //Trim name to match actual satellite name
   var satName = tle.split('\n')[0].trim().substring(2);
-  //Change deb to debris
+  
+  
+  //Remove Debris so we dont double up
   if(satName.endsWith("DEB")){
-    satName = satName + "RIS";
+    satName = satName.substring(0,satName.length-3)
   }
-
-
+  
+  satName += "          Object Type: " + tle.split('\n')[1].trim();
 
   const id = i;
 
-  satNamArr.push[satName];
-
   const satrec = satellite.twoline2satrec(
-  tle.split('\n')[1].trim(),
-  tle.split('\n')[2].trim()
+  tle.split('\n')[2].trim(),
+  tle.split('\n')[3].trim()
   );
 
   var color;
