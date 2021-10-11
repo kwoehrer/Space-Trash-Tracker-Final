@@ -15,16 +15,19 @@ Space Apps challenged our team to dive into the topic of full stack web applicat
 
 # POST HACKATHON KRISCHAN PERSONAL TO DO LIST
 
-1. Create a script that parses all irrelevant information from the initial query for faster load times.
+1. ~~Create a script that parses all irrelevant information from the initial query for faster load times.~~
 2. Create a script that better automates the query (contact spacetrack/celestrak and see if we can get access to their api)
 3. Allow users to search for specific objects and then track that object.
 4. Allow users to input hypthothetical TLE data sets.
 
 # POST HACKATHON KRISCHANS COMPLETE ADDITIONS 
-1. Better optimized our loops for faster loading. (We can load 7,000 objects now instead of 3,000).
-2. Created a html/css layout that is user friendly.
-3. Created a preloader for the web application.
-4. Further utilized the cesiumJS library to show object names when clicked.
+1. ~~Better optimized our loops for faster loading. (We can load 7,000 objects now instead of 3,000).~~ The web application now displays 10811 oribiting objects. Load time is still long.
+2. Created a backend script that parses irrelevant information from  the "GP" JSON that was obtained from the query on the celestrak/space-track database.
+      a. Now the live web application only utilizes OBJECT_TYPE and TLE fields of the initial JSON query result.
+      b. For added functionality to the web application, I could revisit what information is parsed into the "parsedTLEList.json" (This is packaged together with the main script on the live web application)
+4. Created a html/css layout that is user friendly.
+5. Created a preloader for the web application.
+6. Further utilized the cesiumJS library to show object names when clicked.
 
       a. Displaying the object name directly on the cesium viewer model caused frame lag so we used the current implementation of viewing names instead.
       
