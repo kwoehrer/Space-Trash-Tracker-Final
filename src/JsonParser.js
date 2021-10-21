@@ -3,7 +3,7 @@ const fs = require('fs');
 
 let satNameArr =[];
 
-//This code pushes the first 7000 objects on the json to the visualizer. From our query we could access more but loading time stalls out at 7000+.
+//This code pushes all objects on the json to a new json that is smaller size.
 for(let i = 0; i < dataFile.length; i++){
   var json = JSON.stringify(dataFile[i]);
   var totalTLE = JSON.parse(json).TLE_LINE0 + "\n "+ JSON.parse(json).OBJECT_TYPE + "\n"+ JSON.parse(json).TLE_LINE1 + "\n" + JSON.parse(json).TLE_LINE2;
