@@ -1,8 +1,6 @@
 # AWARDS
 Local Level: **First Place at Local Milwaukee NASA Hackathon Hosted by Milky Way Tech Hub**
 
-Global Level: Still being ranked and rated.
-
 # LIVE WEB APPLICATION
 https://kwoehrer.uwmsois.com/ROPV/
 A stable build that displays 7,000 objects slow load.
